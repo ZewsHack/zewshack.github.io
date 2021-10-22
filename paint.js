@@ -20,6 +20,16 @@ var type_bol = [1]
 var poi = []
 var pi = Math.PI
 
+
+var ClickMode = {
+    Paint: 0,
+    Fill: 1,
+    Lwstick: 2,
+    Fill_painting: 3
+}
+
+var currentMode = ClickMode.Paint;
+
 ////////////////////////////////////// DRAW ////////////////////////////////
 c.width = 1150
 c.height = 450
@@ -37,8 +47,9 @@ function drav_line(x, y, dx, dy, color, wight){
 }
 
 
-function fill_painting(x, y){
-  mouseC.moveTo(x, y)
+function fill_painting(x, y, color){
+  mouseC.strokeStyle = color
+  mouseC.lineTo(x, y)
   mouseC.fill()
 }
 
@@ -57,8 +68,33 @@ fresko_id.onmousemove = function(event){
     }else if (type_bol[0] == 0){
       drav_line(x, y, dx, dy, '#ffffff', size_pencil.value)
       cord_cuke.push([x, y, dx, dy, '#ffffff', size_pencil.value])
-    }
+    }else if (type_bol[0] == 3){
+      fill_painting(x, y, sd.value)
+      cord_cuke.push([3, x, y, sd.value])
   }
+}
+}
+
+
+
+function fill_bol(){
+  type_bol[0] = 2
+  currentMode = ClickMode.Fill
+}
+
+function drav_bol(){
+  type_bol[0] = 1
+  currentMode = ClickMode.Paint
+}
+
+function clear_bol(){
+  type_bol[0] = 0
+  currentMode = ClickMode.Lwstick
+}
+
+function fill_painting_bol(){
+  type_bol[0] = 3
+  currentMode = ClickMode.Fill_painting
 }
 
 /////////////////////////////////////// AUTO_CLEAR //////////////////////////////
@@ -85,10 +121,12 @@ function back_cavas(){
       mouseC.beginPath()
       return
 
+    }if (vret[0] == 3){
+      fill_painting(vret[1], vret[2], vret[3])
     }
-    if (vret[0] == "fill"){
-      ffloodFill(mouseC, vret[1], vret[2], vret[3])
-    }
+    // if (vret[0] == "fill"){
+    //   ffloodFill(mouseC, vret[1], vret[2], vret[3])
+    // }
 
     drav_line(vret[0], vret[1], vret[2], vret[3], vret[4], vret[5])
   }
@@ -156,16 +194,6 @@ $('body').mousemove(function(e){
 //////////////////// FILL ///////////////////////////
 
 
-var ClickMode = {
-    Paint: 0,
-    Fill: 1,
-    Lwstick: 2,
-    Clear: 3
-};
-
-var currentMode = ClickMode.Paint;
-
-
 
 ///////// hex in android color ///////
 function reverseString(str) {
@@ -178,8 +206,10 @@ function reverseString(str) {
 $('#star').mousedown(function(event){
     if (currentMode == ClickMode.Fill)
     {
-      color_fill = '0xff' + reverseString(String((sd.value).slice(1)))
-      ffloodFill(mouseC, event.offsetX, event.offsetY, color_fill);
+      color_fill = '0xff' + reverseString(sd.value.replace("#", ''))
+      //console.log(sd.value);
+      ffloodFill(mouseC, event.offsetX, event.offsetY, color_fill)
+      //floodFill(mouseC, event.offsetX, event.offsetY, 34, 0)
       cord_cuke.push(['fill', event.offsetX, event.offsetY, color_fill])
       currentMode = ClickMode.Paint;
       type_bol[0] = 1
@@ -187,24 +217,12 @@ $('#star').mousedown(function(event){
     }
 })
 
-function fill_bol(){
-  type_bol[0] = 2
-  currentMode = ClickMode.Fill;
-}
 
-function drav_bol(){
-  type_bol[0] = 1
-  currentMode = ClickMode.Paint;
-}
-
-function clear_bol(){
-  type_bol[0] = 0
-  currentMode = ClickMode.Lwstick;
-}
-
-function fill_painting_bol(){
-  currentMode = ClickMode.Fill_painting
-}
+// requestAnimationFrame(u)
+// function u(){
+//   requestAnimationFrame(u)
+//   sd.value
+// }
 
 
 function getPixel(pixelData, x, y) {
@@ -215,8 +233,12 @@ function getPixel(pixelData, x, y) {
   }
 }
 
+
+
 async function ffloodFill(ctx, x, y, fillColor) {
+  //window.requestAnimationFrame(ffloodFill(mouseC, event.offsetX, event.offsetY, color_fill))
   const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
+
 
 
   const pixelData = {
@@ -260,3 +282,4 @@ function wait(delay = 0) {
     setTimeout(resolve, delay);
   });
 }
+
