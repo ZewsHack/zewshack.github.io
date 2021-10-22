@@ -160,27 +160,19 @@ var ClickMode = {
 
 var currentMode = ClickMode.Paint;
 
+///////// hex in android color ///////
 function reverseString(str) {
   return str.split("").reverse().join("");
 }
-
-function hexToRgb(hex) {
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
-}
+color_fill = '0xff' + reverseString(String((sd.value).slice(1)))
 
 
 
 $('#star').mousedown(function(event){
     if (currentMode == ClickMode.Fill)
     {
-      faca = '0xff' + reverseString(String((sd.value).slice(1)))
-      ffloodFill(mouseC, event.offsetX, event.offsetY, faca);
-      cord_cuke.push(['fill', event.offsetX, event.offsetY, faca])
+      ffloodFill(mouseC, event.offsetX, event.offsetY, color_fill);
+      cord_cuke.push(['fill', event.offsetX, event.offsetY, color_fill])
       return false;
     }
 })
