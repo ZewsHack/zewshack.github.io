@@ -187,7 +187,7 @@ $('#star').mousedown(function(event){
     }
 })
 
-function fill_rand(){
+function fill_bol(){
   type_bol[0] = 2
   currentMode = ClickMode.Fill;
 }
