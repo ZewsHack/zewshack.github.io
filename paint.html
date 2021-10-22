@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="pain_style.css">
+    <title>paint_js</title>
+    <link rel="shortcut icon" href="icon.png" type="image/png">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  </head>
+  <body style="background: #000; margin: 0px">
+    <div class="grid">
+        <!--         TOP BATTON          -->
+
+        <div class="edit_button_net_columns">
+          <button type="button" class="edit_button_columns" onclick="drav_bol()"><img src="https://icons-for-free.com/iconfiles/png/512/brush+paint+tool+icon-1320183223127207427.png" alt="#"></button>
+          <button id="cler" type="button" class="edit_button_columns" onclick="clear()"><img src="http://s1.iconbird.com/ico/2013/10/464/w512h5121380984608delete.png" alt="#"></button>
+          <input type="color" id="inpot">
+          <input type="range" id="size_pencil" min="1" step="1" value="2" style="grid-column-start: 4; grid-column-end: 7;">
+        </div>
+        <!--       LEFT BUTTON          -->
+
+        <div class="edit_button_net_row">
+          <button type="button" class="edit_button_row" onclick="clear_bol()"><img src="https://cdn1.iconfinder.com/data/icons/design-7/96/Eraser-512.png" alt="#"></button>
+          <!-- <button type="button" class="edit_button_row" ><img src="https://image.flaticon.com/icons/png/512/93/93640.png" alt="#"></button> -->
+          <button type="button" class="edit_button_row" onclick="fill_rand()"><img src="https://key0.cc/images/preview/41924_f77188abb0236b19db660602cabf26f8.png" alt="#"></button>
+          <button type="button" class="edit_button_row" onclick="SCREEN()"><a id="download_canvas" href="" download=""><img src="https://img.icons8.com/pastel-glyph/2x/download.png" alt="#"></a></button>
+          <button type="button" class="edit_button_row" onclick="back_cavas()"><img src="https://image.flaticon.com/icons/png/512/60/60577.png" alt="#"></button>
+          <!--<button type="button" class="edit_button_row" id="paintbucket"><img src="http://s1.iconbird.com/ico/2014/1/631/w512h5121390856655paintbucket512.png" alt="#"></button>-->
+        </div>
+        <!--      SIZE CANVAS          -->
+
+        <!-- <div class="div_size">
+          <input type="number" id="size_width" class="size_canvas" min="100" value="1150">
+          <input type="number" id="size_height" class="size_canvas" min="100" value="450">
+          <button type="button" class="apply"> Применить </button>
+        </div> -->
+        <!--        CANVAS             -->
+
+        <div class="stars">
+          <canvas id="star" class="star"></canvas>
+
+        </div>
+    </div>
+        <!--      SKRIPT              -->
+
+    <script type="text/javascript" src="paint.js"></script>
+  </body>
+</html>
