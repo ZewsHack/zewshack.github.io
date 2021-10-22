@@ -46,15 +46,12 @@ fresko_id.onmousemove = function(event){
     var y = event.offsetY;
     var dx = event.movementX;
     var dy = event.movementY;
-    console.log(x, y, dx, dy);
-    //mouseC.lineWidth = size_pencil.value
     if (type_bol[0] == 1){
-      drav_line(cX-50, cY-50)
       drav_line(x, y, dx, dy, sd.value, size_pencil.value)
       cord_cuke.push([x, y, dx, dy, sd.value, size_pencil.value])
     }else if (type_bol[0] == 0){
-      drav_line(cX-50, cY-50)
-      cord_cuke.push([cX, cY, '#ffffff', size_pencil.value])
+      drav_line(x, y, dx, dy, '#ffffff', size_pencil.value)
+      cord_cuke.push([x, y, dx, dy, '#ffffff', size_pencil.value])
     }
   }
 }
@@ -65,33 +62,6 @@ fresko_id.onmouseup = function(){
   mouseC.beginPath()
   cord_cuke.push(["beginPath"])
 }
-
-
-function componentToHex(c) {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
-}
-
-function rgbToHex(r, g, b) {
-  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
-}
-
-
-fresko_id.onmousedown = function(e){
-  if (e.which == 1) {
-    console.log(rgbToHex(0, 0, 255));
-  }
-}
-
-
-//////////////////////////////////////////// BUTTON BOAL ////////////////////////
-
-
-
-function clear_bol(){
-  type_bol[0] = 0
-}
-
 
 
 ///////////////////////////////////////////// CTRL_Z ////////////////////////////
@@ -117,7 +87,6 @@ function back_cavas(){
     }
 
     drav_line(vret[0], vret[1], vret[2], vret[3], vret[4], vret[5])
-    //drav_line(vret)
   }
 }
 
@@ -136,7 +105,9 @@ function clear(){
   back_cavas()
   sd.value = '#000000'
 }
+
 cler.onclick = function(){
+  currentMode = ClickMode.Clear;
   clear()
 }
 
@@ -146,19 +117,6 @@ function SCREEN(){
   var url = c.toDataURL()
   download.href = url
 }
-
-//////////////////////////////// COLOR //////////////////////////////////////
-
-mouseC.strokeStyle = sd.value
-function Colored(){
-  if (type_bol[0] == 1 || type_bol[0] == 2){
-    mouseC.strokeStyle = sd.value
-  }else if (type_bol[0] == 0){
-    mouseC.strokeStyle = '#ffffff'
-  }
-}
-
-setInterval(Colored, 10)
 
 /////////////////////// CHECK DRAW AREA /////////////////////////
 
@@ -196,7 +154,9 @@ $('body').mousemove(function(e){
 
 var ClickMode = {
     Paint: 0,
-    Fill: 1
+    Fill: 1,
+    Lwstick: 2,
+    Clear: 3
 };
 
 var currentMode = ClickMode.Paint;
@@ -220,8 +180,7 @@ $('#star').mousedown(function(event){
     if (currentMode == ClickMode.Fill)
     {
       faca = '0xff' + reverseString(String((sd.value).slice(1)))
-      console.log(faca, sd.value);
-      floodFill(mouseC, event.offsetX, event.offsetY, faca);
+      ffloodFill(mouseC, event.offsetX, event.offsetY, faca);
       cord_cuke.push(['fill', event.offsetX, event.offsetY, faca])
       return false;
     }
@@ -237,6 +196,10 @@ function drav_bol(){
   currentMode = ClickMode.Paint;
 }
 
+function clear_bol(){
+  type_bol[0] = 0
+  currentMode = ClickMode.Lwstick;
+}
 
 
 function getPixel(pixelData, x, y) {
@@ -261,7 +224,7 @@ async function ffloodFill(ctx, x, y, fillColor) {
 
   if (targetColor !== fillColor) {
 
-    const ticksPerUpdate = 50;
+    const ticksPerUpdate = 900;
     let tickCount = 0;
     const pixelsToCheck = [x, y];
     while (pixelsToCheck.length > 0) {
@@ -291,45 +254,4 @@ function wait(delay = 0) {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
   });
-}
-
-
-async function floodFill(ctx, x, y, fillColor) {
-
-  const imageData = ctx.getImageData(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-  const pixelData = {
-    width: imageData.width,
-    height: imageData.height,
-    data: new Uint32Array(imageData.data.buffer),
-  };
-
-  const targetColor = getPixel(pixelData, x, y);
-
-  if (targetColor !== fillColor) {
-
-    const ticksPerUpdate = 90;
-    let tickCount = 0;
-    const pixelsToCheck = [x, y];
-    while (pixelsToCheck.length > 0) {
-      const y = pixelsToCheck.pop();
-      const x = pixelsToCheck.pop();
-
-      const currentColor = getPixel(pixelData, x, y);
-      if (currentColor === targetColor) {
-        pixelData.data[y * pixelData.width + x] = fillColor;
-
-        ctx.putImageData(imageData, 0, 0);
-        ++tickCount;
-        if (tickCount % ticksPerUpdate === 0) {
-          await wait();
-        }
-
-        pixelsToCheck.push(x + 1, y);
-        pixelsToCheck.push(x - 1, y);
-        pixelsToCheck.push(x, y + 1);
-        pixelsToCheck.push(x, y - 1);
-      }
-    }
-  }
 }
