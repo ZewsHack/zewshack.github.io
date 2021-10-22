@@ -20,6 +20,15 @@ var type_bol = [1]
 var poi = []
 var pi = Math.PI
 
+
+var ClickMode = {
+    Paint: 0,
+    Fill: 1,
+    Lwstick: 2,
+    Clear: 3,
+    Fill_painting: 4
+}
+var currentMode = ClickMode.Paint
 ////////////////////////////////////// DRAW ////////////////////////////////
 c.width = 1150
 c.height = 450
@@ -36,7 +45,10 @@ function drav_line(x, y, dx, dy, color, wight){
   mouseC.closePath()
 }
 
-
+function fill_painting(x, y){
+  mouseC.moveTo(x, y)
+  mouseC.fill()
+}
 
 fresko_id.onmousemove = function(event){
   if (event.which == 1){
@@ -82,7 +94,7 @@ function back_cavas(){
 
     }
     if (vret[0] == "fill"){
-      ffloodFill(vret[1], vret[2], vret[3])
+      ffloodFill(mouseC, vret[1], vret[2], vret[3])
     }
 
     drav_line(vret[0], vret[1], vret[2], vret[3], vret[4], vret[5])
@@ -150,16 +162,6 @@ $('body').mousemove(function(e){
 
 //////////////////// FILL ///////////////////////////
 
-
-var ClickMode = {
-    Paint: 0,
-    Fill: 1,
-    Lwstick: 2,
-    Clear: 3
-};
-
-var currentMode = ClickMode.Paint;
-
 ///////// hex in android color ///////
 function reverseString(str) {
   return str.split("").reverse().join("");
@@ -181,19 +183,20 @@ $('#star').mousedown(function(event){
 })
 
 function fill_rand(){
-  type_bol[0] = 2
-  currentMode = ClickMode.Fill;
+  currentMode = ClickMode.Fill
 }
 
 function drav_bol(){
-  type_bol[0] = 1
-  currentMode = ClickMode.Paint;
+  currentMode = ClickMode.Paint
 }
 
 function clear_bol(){
-  type_bol[0] = 0
-  currentMode = ClickMode.Lwstick;
+  currentMode = ClickMode.Lwstick
 }
+
+ function fill_painting_bol(){
+   currentMode = ClickMode.Fill_painting
+ }
 
 
 function getPixel(pixelData, x, y) {
