@@ -20,15 +20,6 @@ var type_bol = [1]
 var poi = []
 var pi = Math.PI
 
-
-var ClickMode = {
-    Paint: 0,
-    Fill: 1,
-    Lwstick: 2,
-    Clear: 3,
-    Fill_painting: 4
-}
-var currentMode = ClickMode.Paint
 ////////////////////////////////////// DRAW ////////////////////////////////
 c.width = 1150
 c.height = 450
@@ -36,19 +27,21 @@ c.height = 450
 
 function drav_line(x, y, dx, dy, color, wight){
   mouseC.beginPath();
+  mouseC.lineCap = "round"
   mouseC.lineWidth = wight
   mouseC.strokeStyle = color
   mouseC.moveTo(x, y);
-  mouseC.lineTo(x - dx, y - dy);
-  mouseC.lineCap = "round"
+  mouseC.lineTo(x - dx + dx/2.8, y - dy + dy/2.8);
   mouseC.stroke()
   mouseC.closePath()
 }
+
 
 function fill_painting(x, y){
   mouseC.moveTo(x, y)
   mouseC.fill()
 }
+
 
 fresko_id.onmousemove = function(event){
   if (event.which == 1){
@@ -58,10 +51,10 @@ fresko_id.onmousemove = function(event){
     var y = event.offsetY;
     var dx = event.movementX;
     var dy = event.movementY;
-    if (currentMode = ClickMode.Paint){
+    if (type_bol[0] == 1){
       drav_line(x, y, dx, dy, sd.value, size_pencil.value)
       cord_cuke.push([x, y, dx, dy, sd.value, size_pencil.value])
-    }else if (currentMode = ClickMode.Lwstick){
+    }else if (type_bol[0] == 0){
       drav_line(x, y, dx, dy, '#ffffff', size_pencil.value)
       cord_cuke.push([x, y, dx, dy, '#ffffff', size_pencil.value])
     }
@@ -162,6 +155,18 @@ $('body').mousemove(function(e){
 
 //////////////////// FILL ///////////////////////////
 
+
+var ClickMode = {
+    Paint: 0,
+    Fill: 1,
+    Lwstick: 2,
+    Clear: 3
+};
+
+var currentMode = ClickMode.Paint;
+
+
+
 ///////// hex in android color ///////
 function reverseString(str) {
   return str.split("").reverse().join("");
@@ -183,20 +188,23 @@ $('#star').mousedown(function(event){
 })
 
 function fill_rand(){
-  currentMode = ClickMode.Fill
+  type_bol[0] = 2
+  currentMode = ClickMode.Fill;
 }
 
 function drav_bol(){
-  currentMode = ClickMode.Paint
+  type_bol[0] = 1
+  currentMode = ClickMode.Paint;
 }
 
 function clear_bol(){
-  currentMode = ClickMode.Lwstick
+  type_bol[0] = 0
+  currentMode = ClickMode.Lwstick;
 }
 
- function fill_painting_bol(){
-   currentMode = ClickMode.Fill_painting
- }
+function fill_painting_bol(){
+  currentMode = ClickMode.Fill_painting
+}
 
 
 function getPixel(pixelData, x, y) {
