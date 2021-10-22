@@ -174,6 +174,8 @@ $('#star').mousedown(function(event){
       color_fill = '0xff' + reverseString(String((sd.value).slice(1)))
       ffloodFill(mouseC, event.offsetX, event.offsetY, color_fill);
       cord_cuke.push(['fill', event.offsetX, event.offsetY, color_fill])
+      currentMode = ClickMode.Paint;
+      type_bol[0] = 1
       return false;
     }
 })
