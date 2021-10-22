@@ -46,10 +46,10 @@ fresko_id.onmousemove = function(event){
     var y = event.offsetY;
     var dx = event.movementX;
     var dy = event.movementY;
-    if (type_bol[0] == 1){
+    if (currentMode = ClickMode.Paint){
       drav_line(x, y, dx, dy, sd.value, size_pencil.value)
       cord_cuke.push([x, y, dx, dy, sd.value, size_pencil.value])
-    }else if (type_bol[0] == 0){
+    }else if (currentMode = ClickMode.Lwstick){
       drav_line(x, y, dx, dy, '#ffffff', size_pencil.value)
       cord_cuke.push([x, y, dx, dy, '#ffffff', size_pencil.value])
     }
