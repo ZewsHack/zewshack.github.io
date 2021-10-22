@@ -164,13 +164,14 @@ var currentMode = ClickMode.Paint;
 function reverseString(str) {
   return str.split("").reverse().join("");
 }
-color_fill = '0xff' + reverseString(String((sd.value).slice(1)))
+
 
 
 
 $('#star').mousedown(function(event){
     if (currentMode == ClickMode.Fill)
     {
+      color_fill = '0xff' + reverseString(String((sd.value).slice(1)))
       ffloodFill(mouseC, event.offsetX, event.offsetY, color_fill);
       cord_cuke.push(['fill', event.offsetX, event.offsetY, color_fill])
       return false;
