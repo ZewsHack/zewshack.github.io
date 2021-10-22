@@ -72,7 +72,6 @@ function back_cavas(){
 
   for (let vret of cord_cuke){
 
-    console.log(vret[0]);
     if (vret[0] == "beginPath"){
       mouseC.beginPath()
     }
