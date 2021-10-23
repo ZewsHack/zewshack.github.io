@@ -48,7 +48,7 @@ $('body').css('background-size', `${window.outerWidth}px ${window.outerHeight}px
 c.width = 1400
 c.height = 500
 
-del = 4.4
+del = 5
 
 function drav_line(x, y, dx, dy, color, wight){
   mouseC.beginPath();
