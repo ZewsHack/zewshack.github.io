@@ -17,10 +17,6 @@
   grid-template-columns: repeat(3, var(--height_grid));
 }
 
-#size_pencil{
-  cursor: pointer;
-}
-
 #inpot{
   background: #0000;
   position: relative;
@@ -31,8 +27,11 @@
   /* z-index: -1; */
   border: 0px;
   grid-column: 3;
+  cursor: pointer;
 }
-
+#size_pencil{
+  cursor: pointer;
+}
 /* .inpot:checked{
   display: inline-block;
 } */
@@ -73,6 +72,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 2px solid #000;
   background: #fff;
   /* background-image: url(https://html-plus.in.ua/wp-content/uploads/2019/09/grid-canvas.png); */
+  cursor: url('pencil_cabvas.cur'), auto;
 }
 
 .stars{
@@ -87,16 +87,16 @@ input[type="number"]::-webkit-inner-spin-button {
   grid-template-columns: repeat(23, var(--width_grid));
 }
 
-.edit_button_net_row{
-  display: grid;
-  grid-row: 2;
-  grid-template-rows: repeat(9, var(--height_grid));
-}
-
 .edit_button{
   margin:4px;
   border-radius: 11px;
   cursor: pointer;
+}
+
+.edit_button_net_row{
+  display: grid;
+  grid-row: 2;
+  grid-template-rows: repeat(9, var(--height_grid));
 }
 
 
@@ -108,3 +108,4 @@ img{
 button:active img{
   height: 20px
 }
+
