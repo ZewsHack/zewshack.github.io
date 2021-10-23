@@ -17,6 +17,10 @@
   grid-template-columns: repeat(3, var(--height_grid));
 }
 
+#size_pencil{
+  cursor: pointer;
+}
+
 #inpot{
   background: #0000;
   position: relative;
@@ -83,20 +87,16 @@ input[type="number"]::-webkit-inner-spin-button {
   grid-template-columns: repeat(23, var(--width_grid));
 }
 
-.edit_button_columns{
-  margin: 5px;
-  border-radius: 5px;
-}
-
 .edit_button_net_row{
   display: grid;
   grid-row: 2;
   grid-template-rows: repeat(9, var(--height_grid));
 }
 
-.edit_button_row{
-  margin: 5px;
-  border-radius: 5px;
+.edit_button{
+  margin:4px;
+  border-radius: 11px;
+  cursor: pointer;
 }
 
 
