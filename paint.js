@@ -56,7 +56,8 @@ function drav_line(x, y, dx, dy, color, wight){
   mouseC.lineWidth = wight
   mouseC.strokeStyle = color
   mouseC.moveTo(x, y);
-  mouseC.lineTo(x - dx + dx/del, y - dy + dy/del);
+  mouseC.lineTo(x - dx, y - dy)
+  //mouseC.lineTo(x - dx + dx/del, y - dy + dy/del);
   mouseC.stroke()
   mouseC.closePath()
 }
