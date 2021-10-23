@@ -4,10 +4,7 @@
   --width_grid: 50px;
 }
 
-body{
-  background: url('https://artfiles.alphacoders.com/440/thumb-1920-44067.jpg');
-  background-size: 1500px;
-}
+
 .grid{
   display: grid;
   user-select: none;
@@ -39,9 +36,11 @@ body{
 #inpu-color-field{
   background: #0000;
   position: relative;
-  top: -7px;
+  top: -5px;
   width: 26px;
   height: 29px;
+  padding: 0px;
+  /* z-index: -1; */
   border: 0px;
   cursor: pointer;
 }
@@ -105,6 +104,9 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 .edit_button{
+  background: orange;
+  border: none;
+  padding-top: 3px;
   margin:4px;
   border-radius: 11px;
   cursor: pointer;
@@ -125,4 +127,3 @@ img{
 button:active img{
   height: 20px
 }
-
