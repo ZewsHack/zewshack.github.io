@@ -169,7 +169,6 @@ function clear(){
   cord_cuke = [1]
   mouseC.beginPath()
   back_cavas()
-  sd.value = '#000000'
 }
 
 cler.onclick = function(){
