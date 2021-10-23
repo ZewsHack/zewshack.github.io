@@ -30,9 +30,23 @@ var ClickMode = {
 
 var currentMode = ClickMode.Paint;
 
-////////////////////////////////////// DRAW ///////////////////////////////
-c.width = 1150
-c.height = 450
+items =["https://wallpapercave.com/wp/wb41glx.jpg","https://www.enjpg.com/img/2020/desktop-backgrounds-1.png",
+        "https://www.zastavki.com/pictures/1366x768/2014/Drawn_wallpapers___Paintings_Painting_Edvard_Munch_-_Scream_068812_24.jpg",
+        "https://upload.wikimedia.org/wikipedia/ru/d/dd/The_Persistence_of_Memory.jpg",
+        "https://losko.ru/wp-content/uploads/2019/11/7702b9faef4382f33090b0b87b2c0ad0-1.jpg",
+        "https://nyblog.ru/wp-content/uploads/2020/10/kubizm-v-iskusstve-foto-1-870x400.jpg",
+        "https://img.wallpapersafari.com/desktop/1024/576/59/42/4AbaqM.jpg"]
+
+
+var item = items[Math.floor(Math.random()*items.length)];
+console.log(item);
+
+$('body').css('background', `url(${item})`)
+$('body').css('background-size', `${window.outerWidth}px ${window.outerHeight}px`)
+
+////////////////////////////////////// DRAW ////////////////////////////////
+c.width = 1400
+c.height = 500
 
 del = 4.4
 
@@ -169,7 +183,6 @@ function SCREEN(){
   var url = c.toDataURL()
   download.href = url
 }
-
 /////////////////////// CHECK DRAW AREA /////////////////////////
 
 
