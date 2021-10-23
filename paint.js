@@ -78,6 +78,10 @@ function fill_painting(x, y, color){
   mouseC.fill()
 }
 
+function rect_clear(x, y, xh){
+  mouseC.clearRect(x, y, xh, xh)
+}
+
 
 fresko_id.onmousemove = function(event){
   if (event.which == 1){
@@ -91,8 +95,8 @@ fresko_id.onmousemove = function(event){
       drav_line(x, y, dx, dy, sd.value, size_pencil.value)
       cord_cuke.push([x, y, dx, dy, sd.value, size_pencil.value])
     }else if (type_bol[0] == 0){
-      drav_line(x, y, dx, dy, '#ffffff', size_pencil.value)
-      cord_cuke.push([x, y, dx, dy, '#ffffff', size_pencil.value])
+      rect_clear(x-size_pencil.value/2, y-size_pencil.value/2, size_pencil.value)
+      cord_cuke.push(['cler', x, y, size_pencil.value])
     }else if (type_bol[0] == 3){
       fill_painting(x, y, sd.value)
       cord_cuke.push([3, x, y, sd.value])
