@@ -8,6 +8,7 @@ var grid = document.getElementsByClassName('grid')
 var box = document.getElementsByClassName('smail')
 var download = document.getElementById('download_canvas')
 var sd = document.getElementById('inpot')
+var sd_fip = document.getElementById('inpu-color-field')
 var mouseC = c.getContext("2d")
 var mouseC_id = fresko_id.getContext("2d")
 var size_pencil = document.getElementById('size_pencil')
@@ -19,7 +20,6 @@ var cord_cuke = []
 var type_bol = [1]
 var poi = []
 var pi = Math.PI
-
 
 var ClickMode = {
     Paint: 0,
@@ -34,6 +34,7 @@ var currentMode = ClickMode.Paint;
 c.width = 1150
 c.height = 450
 
+del = 4.4
 
 function drav_line(x, y, dx, dy, color, wight){
   mouseC.beginPath();
@@ -41,16 +42,24 @@ function drav_line(x, y, dx, dy, color, wight){
   mouseC.lineWidth = wight
   mouseC.strokeStyle = color
   mouseC.moveTo(x, y);
-  //mouseC.lineTo(x - dx, y - dy);
-  mouseC.lineTo(x - dx + dx/4.8, y - dy + dy/4.8);
+  mouseC.lineTo(x - dx + dx/del, y - dy + dy/del);
   mouseC.stroke()
   mouseC.closePath()
 }
 
+function uwu(){
+  $('.star').css('background', sd_fip.value)
+}
+
+setInterval(uwu, 100)
 
 function fill_painting(x, y, color){
+  console.log(color);
   mouseC.strokeStyle = color
+  mouseC.lineWidth = 1
+  mouseC.lineCap = "round"
   mouseC.lineTo(x, y)
+  mouseC.stroke()
   mouseC.fill()
 }
 
@@ -78,20 +87,20 @@ fresko_id.onmousemove = function(event){
 
 
 
-function fill_bol(){
-  type_bol[0] = 2
-  currentMode = ClickMode.Fill
-}
-
-function drav_bol(){
+$('.draw').click(function(){
   type_bol[0] = 1
   currentMode = ClickMode.Paint
-}
+})
 
-function clear_bol(){
+$('.lwstick').click(function(){
   type_bol[0] = 0
   currentMode = ClickMode.Lwstick
-}
+})
+
+$('.fill').click(function(){
+  type_bol[0] = 2
+  currentMode = ClickMode.Fill
+})
 
 function fill_painting_bol(){
   type_bol[0] = 3
@@ -100,10 +109,10 @@ function fill_painting_bol(){
 
 /////////////////////////////////////// AUTO_CLEAR //////////////////////////////
 
-fresko_id.onmouseup = function(){
+$('#star').mouseup(function(){
   mouseC.beginPath()
   cord_cuke.push(["beginPath"])
-}
+})
 
 
 ///////////////////////////////////////////// CTRL_Z ////////////////////////////
@@ -122,8 +131,8 @@ function back_cavas(){
       mouseC.beginPath()
       return
 
-    }if (vret[0] == 3){
-      fill_painting(vret[1], vret[2], vret[3])
+    }if (vret[0] == 'fill'){
+      fill_painting(mouseC, vret[1], vret[2], vret[3])
     }
     // if (vret[0] == "fill"){
     //   ffloodFill(mouseC, vret[1], vret[2], vret[3])
@@ -283,4 +292,3 @@ function wait(delay = 0) {
     setTimeout(resolve, delay);
   });
 }
-
