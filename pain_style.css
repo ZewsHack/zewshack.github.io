@@ -4,6 +4,10 @@
   --width_grid: 50px;
 }
 
+body{
+  background: url('https://artfiles.alphacoders.com/440/thumb-1920-44067.jpg');
+  background-size: 1500px;
+}
 .grid{
   display: grid;
   user-select: none;
@@ -16,7 +20,9 @@
   grid-column: 1;
   grid-template-columns: repeat(3, var(--height_grid));
 }
+.exp-size-bol{
 
+}
 #inpot{
   background: #0000;
   position: relative;
@@ -29,9 +35,23 @@
   grid-column: 3;
   cursor: pointer;
 }
+
+#inpu-color-field{
+  background: #0000;
+  position: relative;
+  top: -7px;
+  width: 26px;
+  height: 29px;
+  border: 0px;
+  cursor: pointer;
+}
+}
 #size_pencil{
   cursor: pointer;
 }
+/* .inpot:checked{
+  display: inline-block;
+} */
 
 .color_line{
   position: relative;
@@ -69,7 +89,7 @@ input[type="number"]::-webkit-inner-spin-button {
   border: 2px solid #000;
   background: #fff;
   /* background-image: url(https://html-plus.in.ua/wp-content/uploads/2019/09/grid-canvas.png); */
-  cursor: url('pencil_cabvas.cur'), auto;
+  cursor: url(pencil_cabvas.cur), crosshair
 }
 
 .stars{
@@ -105,4 +125,3 @@ img{
 button:active img{
   height: 20px
 }
-
