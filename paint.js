@@ -45,10 +45,9 @@ $('body').css('background', `url(${item})`)
 $('body').css('background-size', `${window.outerWidth}px ${window.outerHeight}px`)
 
 ////////////////////////////////////// DRAW ////////////////////////////////
-c.width = 1400
-c.height = 500
+c.width = window.outerWidth - window.outerWidth/12
+c.height = window.outerHeight - window.outerHeight/4
 
-del = 5
 
 function drav_line(x, y, dx, dy, color, wight){
   mouseC.beginPath();
@@ -57,7 +56,6 @@ function drav_line(x, y, dx, dy, color, wight){
   mouseC.strokeStyle = color
   mouseC.moveTo(x, y);
   mouseC.lineTo(x - dx, y - dy)
-  //mouseC.lineTo(x - dx + dx/del, y - dy + dy/del);
   mouseC.stroke()
   mouseC.closePath()
 }
